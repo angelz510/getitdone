@@ -1,15 +1,31 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+const ListButton = (props) => {
+  return (
+    <TouchableOpacity style={styles.todoContainer} onPress={() => {}}>
+      <View>
+        <Text style={styles.todoTitle}>{props.title}</Text>
+      </View>
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity onPress={() => {}}>
+          <Ionicons name="options-outline" size={24} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {}}>
+          <Ionicons name="trash-outline" size={24} color="white" />
+        </TouchableOpacity>
+      </View>
+    </TouchableOpacity>
+  );
+};
 
 export default () => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.todoContainer} onPress={() => {}}>
-        <View>
-          <Text style={styles.todoTitle}> Things to do</Text>
-        </View>
-      </TouchableOpacity>
-      <Text>Home Screen</Text>
+      <ListButton title="School" />
+      <ListButton title="Work" />
+      <ListButton title="Fun" />
     </View>
   );
 };
