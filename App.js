@@ -10,7 +10,18 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Get It Done" component={Home} />
+        <Stack.Screen
+          name="Get It Done"
+          component={Home}
+          options={() => {
+            return {
+              headerStyle: {
+                backgroundColor: "#161b22",
+              },
+              headerTintColor: "white",
+            };
+          }}
+        />
         <Stack.Screen
           name="ToDoList"
           component={ToDoList}

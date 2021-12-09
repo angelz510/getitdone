@@ -30,12 +30,12 @@ const TodoButton = ({ title, color, onPress, onDelete }) => {
   );
 };
 
-const renderAddListIcon = (addBucket) => {
+const renderAddIcon = (addBucket) => {
   return (
     <TouchableOpacity
       onPress={() => addBucket({ title: "Title", color: Colors.orange })}
     >
-      <Text style={styles.icon}>+</Text>
+      <Text style={styles.icon}>+ </Text>
     </TouchableOpacity>
   );
 };
@@ -47,19 +47,19 @@ export default ({ navigation }) => {
     { title: "Fun", color: Colors.blue },
   ]);
 
-  const addBucketToList = (bucket) => {
+  const addBucket = (bucket) => {
     todoBuckets.push(bucket);
     setTodoBuckets([...todoBuckets]);
   };
 
-  const removeBucketFromList = (index) => {
+  const removeBucket = (index) => {
     todoBuckets.splice(index, 1);
     setTodoBuckets([...todoBuckets]);
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => renderAddListIcon(addBucketToList),
+      headerRight: () => renderAddIcon(addBucket),
     });
   });
 
@@ -74,7 +74,7 @@ export default ({ navigation }) => {
               color={color}
               navigation={navigation}
               onPress={() => navigation.navigate("ToDoList", { title, color })}
-              onDelete={() => removeBucketFromList(index)}
+              onDelete={() => removeBucket(index)}
             />
           );
         }}
@@ -86,7 +86,7 @@ export default ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#222",
+    backgroundColor: "#040208",
   },
   todoContainer: {
     flexDirection: "row",
