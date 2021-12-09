@@ -1,12 +1,24 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import Colors from "../colors/Colors";
 
-const ListButton = (props) => {
+const TodoButton = ({ title, color, navigation }) => {
   return (
-    <TouchableOpacity style={styles.todoContainer} onPress={() => {}}>
+    <TouchableOpacity
+      style={[styles.todoContainer, { backgroundColor: color }]}
+      onPress={() => {
+        navigation.navigate("ToDoList", { title, color });
+      }}
+    >
       <View>
-        <Text style={styles.todoTitle}>{props.title}</Text>
+        <Text style={styles.todoTitle}>{title}</Text>
       </View>
       <View style={{ flexDirection: "row" }}>
         <TouchableOpacity onPress={() => {}}>
@@ -20,12 +32,21 @@ const ListButton = (props) => {
   );
 };
 
-export default () => {
+export default ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <ListButton title="School" />
-      <ListButton title="Work" />
-      <ListButton title="Fun" />
+      <FlatList
+        data={[
+          { title: "School", color: Colors.red },
+          { title: "Work", color: Colors.green },
+          { title: "Fun", color: Colors.blue },
+        ]}
+        renderItem={({ item: { title, color }, index }) => {
+          return (
+            <TodoButton title={title} color={color} navigation={navigation} />
+          );
+        }}
+      />
     </View>
   );
 };
@@ -33,7 +54,7 @@ export default () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#222",
   },
   todoContainer: {
     flexDirection: "row",
@@ -45,7 +66,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 10,
     padding: 15,
-    backgroundColor: "salmon",
   },
   todoTitle: {
     fontSize: 24,
