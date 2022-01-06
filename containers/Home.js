@@ -107,5 +107,6 @@ const styles = StyleSheet.create({
   icon: {
     padding: 5,
     fontSize: 24,
+    color: "white",
   },
 });

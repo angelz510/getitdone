@@ -19,6 +19,9 @@ export default function App() {
                 backgroundColor: "#161b22",
               },
               headerTintColor: "white",
+              headerTitleStyle: {
+                fontSize: 20,
+              },
             };
           }}
         />
