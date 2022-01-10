@@ -34,6 +34,11 @@ export default ({ navigation }) => {
     setToDoItems([...toDoItems]);
   };
 
+  const updateTodo = (index, todo) => {
+    toDoItems[index] = todo;
+    setToDoItems([...toDoItems]);
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => renderAddIcon(addTodo),
@@ -45,7 +50,17 @@ export default ({ navigation }) => {
       <FlatList
         data={toDoItems}
         renderItem={({ item: { text, isChecked }, index }) => {
-          return <ToDoItem text={text} isChecked={isChecked} />;
+          return (
+            <ToDoItem
+              text={text}
+              isChecked={isChecked}
+              onChecked={() => {
+                const toDoItem = toDoItems[index];
+                toDoItem.isChecked = !isChecked;
+                updateTodo(index, toDoItem);
+              }}
+            />
+          );
         }}
       />
     </View>
