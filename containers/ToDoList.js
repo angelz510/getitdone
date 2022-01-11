@@ -12,7 +12,7 @@ import Colors from "../colors/Colors";
 const renderAddIcon = (addTodo) => {
   return (
     <TouchableOpacity
-      onPress={() => addTodo({ text: "hello2", isChecked: false })}
+      onPress={() => addTodo({ text: "New Thing To Do", isChecked: false })}
     >
       <Text style={styles.icon}>+ </Text>
     </TouchableOpacity>
@@ -59,6 +59,11 @@ export default ({ navigation }) => {
                 toDoItem.isChecked = !isChecked;
                 updateTodo(index, toDoItem);
               }}
+              onChangeText={(newText) => {
+                const toDoItem = toDoItems[index];
+                toDoItem.text = newText;
+                updateTodo(index, toDoItem);
+              }}
             />
           );
         }}
@@ -70,7 +75,7 @@ export default ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "#040208",
   },
   icon: {
     padding: 5,
