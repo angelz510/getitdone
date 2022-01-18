@@ -9,7 +9,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import Colors from "../colors/Colors";
 
-const TodoButton = ({ title, color, onPress, onDelete }) => {
+const TodoButton = ({ title, color, onPress, onDelete, onOptions }) => {
   return (
     <TouchableOpacity
       style={[styles.todoContainer, { backgroundColor: color }]}
@@ -19,7 +19,7 @@ const TodoButton = ({ title, color, onPress, onDelete }) => {
         <Text style={styles.todoTitle}>{title}</Text>
       </View>
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={onOptions}>
           <Ionicons name="options-outline" size={24} color="white" />
         </TouchableOpacity>
         <TouchableOpacity onPress={onDelete}>
@@ -30,11 +30,9 @@ const TodoButton = ({ title, color, onPress, onDelete }) => {
   );
 };
 
-const renderAddIcon = (addBucket) => {
+const renderAddIcon = (navigation) => {
   return (
-    <TouchableOpacity
-      onPress={() => addBucket({ title: "Title", color: Colors.orange })}
-    >
+    <TouchableOpacity onPress={() => navigation.navigate("Edit", {})}>
       <Text style={styles.icon}>+ </Text>
     </TouchableOpacity>
   );
@@ -59,7 +57,7 @@ export default ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => renderAddIcon(addBucket),
+      headerRight: () => renderAddIcon(navigation),
     });
   });
 
@@ -74,6 +72,7 @@ export default ({ navigation }) => {
               color={color}
               navigation={navigation}
               onPress={() => navigation.navigate("ToDoList", { title, color })}
+              onOptions={() => navigation.navigate("Edit", { title, color })}
               onDelete={() => removeBucket(index)}
             />
           );
