@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { CommonActions } from "@react-navigation/native";
 import Colors from "../colors/Colors";
 
 export default ({ navigation, route }) => {
@@ -26,7 +27,16 @@ export default ({ navigation, route }) => {
           style={[styles.input, { outline: "none" }]}
         />
       </View>
-      <TouchableOpacity style={styles.saveButton} onPress={() => {}}>
+      <TouchableOpacity
+        style={styles.saveButton}
+        onPress={() => {
+          if (title.length > 1) {
+            route.params.saveChanges({ title, color });
+            navigation.dispatch(CommonActions.goBack());
+          } else {
+          }
+        }}
+      >
         <Text style={{ color: "white", fontSize: 24, fontWeight: "bold" }}>
           Save
         </Text>

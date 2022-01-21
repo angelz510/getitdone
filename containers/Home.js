@@ -30,9 +30,11 @@ const TodoButton = ({ title, color, onPress, onDelete, onOptions }) => {
   );
 };
 
-const renderAddIcon = (navigation) => {
+const renderAddIcon = (navigation, addBucket) => {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("Edit", {})}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Edit", { saveChanges: addBucket })}
+    >
       <Text style={styles.icon}>+ </Text>
     </TouchableOpacity>
   );
@@ -55,9 +57,14 @@ export default ({ navigation }) => {
     setTodoBuckets([...todoBuckets]);
   };
 
+  const updateBucket = (index, item) => {
+    todoBuckets[index] = item;
+    setTodoBuckets([...todoBuckets]);
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => renderAddIcon(navigation),
+      headerRight: () => renderAddIcon(navigation, addBucket),
     });
   });
 
@@ -72,7 +79,13 @@ export default ({ navigation }) => {
               color={color}
               navigation={navigation}
               onPress={() => navigation.navigate("ToDoList", { title, color })}
-              onOptions={() => navigation.navigate("Edit", { title, color })}
+              onOptions={() =>
+                navigation.navigate("Edit", {
+                  title,
+                  color,
+                  saveChanges: (item) => updateBucket(index, item),
+                })
+              }
               onDelete={() => removeBucket(index)}
             />
           );
