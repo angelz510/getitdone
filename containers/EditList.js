@@ -8,23 +8,57 @@ import {
 } from "react-native";
 import { CommonActions } from "@react-navigation/native";
 import Colors from "../colors/Colors";
+import ColorSelector from "../components/ColorSelector";
+
+const colorList = [
+  "blue",
+  "teal",
+  "green",
+  "olive",
+  "yellow",
+  "orange",
+  "red",
+  "pink",
+  "purple",
+  "blueGray",
+];
 
 export default ({ navigation, route }) => {
   const [title, setTitle] = useState(route.params.title || "");
   const [color, setColor] = useState(route.params.color || "blue");
+  const [isValid, setIsValid] = useState(true);
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.label}> List Name </Text>
+        <View style={{ flexDirection: "column" }}>
+          <Text style={styles.label}>List Name</Text>
+          {!isValid && (
+            <Text style={{ color: Colors.red, fontSize: 14, marginLeft: 8 }}>
+              * List Name cannot be empty
+            </Text>
+          )}
+        </View>
         <TextInput
           underlineColorAndroid={"transparent"}
           selectionColor={"transparent"}
           autoFocus={true}
           value={title}
-          onChangeText={setTitle}
+          onChangeText={(text) => {
+            setTitle(text);
+            setIsValid(true);
+          }}
           placeholder={"New List Name"}
           maxLength={30}
           style={[styles.input, { outline: "none" }]}
+        />
+        <Text style={styles.label}>Choose Color</Text>
+        <ColorSelector
+          onSelect={(color) => {
+            setColor(color);
+            navigation.dispatch(CommonActions.setParams({ color }));
+          }}
+          selectedColor={color}
+          colorOptions={colorList}
         />
       </View>
       <TouchableOpacity
@@ -34,6 +68,7 @@ export default ({ navigation, route }) => {
             route.params.saveChanges({ title, color });
             navigation.dispatch(CommonActions.goBack());
           } else {
+            setIsValid(false);
           }
         }}
       >
@@ -53,7 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   input: {
-    color: Colors.darkGray,
+    color: Colors.lightGray,
     borderBottomColor: Colors.lightGray,
     borderBottomWidth: 0.5,
     marginHorizontal: 5,
@@ -72,7 +107,7 @@ const styles = StyleSheet.create({
   label: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 16,
+    fontSize: 22,
     margin: 8,
   },
 });

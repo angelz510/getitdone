@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     padding: 5,
     paddingRight: 8,
     fontSize: 23,
+    marginTop: 10,
   },
   input: {
     borderBottomColor: "white",
@@ -91,10 +92,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     padding: 1,
     height: 25,
-    fontSize: 16,
+    fontSize: 24,
     color: "white",
+    marginTop: 20,
   },
   text: {
+    marginTop: 15,
     paddingTop: 5,
     padding: 3,
     fontSize: 20,

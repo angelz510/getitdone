@@ -20,9 +20,7 @@ const renderAddIcon = (addTodo) => {
 };
 
 export default ({ navigation }) => {
-  const [toDoItems, setToDoItems] = useState([
-    { text: "Hello", isChecked: false },
-  ]);
+  const [toDoItems, setToDoItems] = useState([]);
 
   const addTodo = (todo) => {
     toDoItems.push(todo);
