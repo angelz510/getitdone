@@ -35,6 +35,7 @@ export default () => {
           onChangeText={(text) => {
             setPasswordField({ text });
           }}
+          secureTextEntry={true}
           errorMessage={passwordField.errorMessage}
           labelStyle={styles.label}
           autoCompleteType="password"
@@ -45,9 +46,9 @@ export default () => {
           onChangeText={(text) => {
             setPasswordConfirmationField({ text });
           }}
+          secureTextEntry={true}
           errorMessage={passwordConfirmationField.errorMessage}
           labelStyle={styles.label}
-          autoCompleteType="password"
         />
         {/* login toggle */}
       </View>
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "stretch",
   },
-  label: { fontSize: 24, fontWeight: "bold", color: "white" },
+  label: { fontSize: 24, fontWeight: "bold", color: "whitesmoke" },
   header: {
     fontSize: 30,
     color: Colors.lightGray,

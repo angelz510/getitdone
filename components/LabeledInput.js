@@ -49,6 +49,6 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     height: 32,
     fontSize: 24,
-    color: "white",
+    color: "whitesmoke",
   },
 });
