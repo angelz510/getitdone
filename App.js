@@ -14,7 +14,22 @@ const AuthStack = createStackNavigator();
 const AuthScreens = () => {
   return (
     <AuthStack.Navigator>
-      <AuthStack.Screen name="Login" component={Login} />
+      <AuthStack.Screen
+        name="Login"
+        component={Login}
+        options={() => {
+          return {
+            headerStyle: {
+              backgroundColor: "#161b22",
+            },
+            headerTintColor: "white",
+            headerTitleAlign: "center",
+            headerTitleStyle: {
+              fontSize: 25,
+            },
+          };
+        }}
+      />
     </AuthStack.Navigator>
   );
 };
