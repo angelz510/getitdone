@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { initializeApp } from "firebase/app";
 import Colors from "./colors/Colors";
 import Home from "./containers/Home";
 import ToDoList from "./containers/ToDoList";
@@ -84,21 +83,9 @@ const Screens = () => {
 };
 
 export default function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   return (
     <NavigationContainer>
       {isAuthenticated ? <Screens /> : <AuthScreens />}
     </NavigationContainer>
   );
 }
-
-const firebaseConfig = {
-  apiKey: "AIzaSyD0FbAxw4wSsy7qcX3KDZ3eRiy9HN2S4S4",
-  authDomain: "getitdone-e2ad2.firebaseapp.com",
-  projectId: "getitdone-e2ad2",
-  storageBucket: "getitdone-e2ad2.appspot.com",
-  messagingSenderId: "693524893315",
-  appId: "1:693524893315:web:a98e2489916cfb326a55b6",
-};
-
-const app = initializeApp(firebaseConfig);

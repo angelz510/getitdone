@@ -102,7 +102,7 @@ export default () => {
           }
           if (!isValid.password) {
             passwordField.errorMessage =
-              "Password must be at least 8 characters long with a number, uppercase, lowercase, number, and symbol.";
+              "Password must be at least 8 characters and include a number, lowercase, uppercase, number, and symbol.";
             setPasswordField({ ...passwordField });
             isAllValid = false;
           }
