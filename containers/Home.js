@@ -32,11 +32,26 @@ const TodoButton = ({ title, color, onPress, onDelete, onOptions }) => {
 
 const renderAddIcon = (navigation, addBucket) => {
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate("Edit", { saveChanges: addBucket })}
-    >
-      <Text style={styles.icon}>+ </Text>
-    </TouchableOpacity>
+    <View style={{ flexDirection: "row" }}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Edit", { saveChanges: addBucket })}
+      >
+        <Text style={styles.icon}>+ </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{
+          justifyContent: "center",
+          marginRight: 20,
+          marginTop: 4,
+          marginLeft: 20,
+        }}
+        onPress={() =>
+          navigation.navigate("Settings", { saveChanges: addBucket })
+        }
+      >
+        <Ionicons name="settings" size={20} color="white" />
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -118,7 +133,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     padding: 5,
-    fontSize: 24,
+    fontSize: 30,
     color: "white",
   },
 });

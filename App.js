@@ -6,6 +6,19 @@ import Home from "./containers/Home";
 import ToDoList from "./containers/ToDoList";
 import EditList from "./containers/EditList";
 import Login from "./containers/Login";
+import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const firebaseApp = initializeApp({
+  apiKey: "AIzaSyD0FbAxw4wSsy7qcX3KDZ3eRiy9HN2S4S4",
+  authDomain: "getitdone-e2ad2.firebaseapp.com",
+  projectId: "getitdone-e2ad2",
+  storageBucket: "getitdone-e2ad2.appspot.com",
+  messagingSenderId: "693524893315",
+  appId: "1:693524893315:web:a98e2489916cfb326a55b6",
+});
+
+const auth = getAuth(firebaseApp);
 
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
@@ -83,6 +96,16 @@ const Screens = () => {
 };
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
+      }
+    });
+  }, []);
   return (
     <NavigationContainer>
       {isAuthenticated ? <Screens /> : <AuthScreens />}
