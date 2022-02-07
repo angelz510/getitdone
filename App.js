@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Colors from "./colors/Colors";
 import Home from "./containers/Home";
+import Settings from "./containers/Settings";
 import ToDoList from "./containers/ToDoList";
 import EditList from "./containers/EditList";
 import Login from "./containers/Login";
@@ -63,6 +64,7 @@ const Screens = () => {
           };
         }}
       />
+      <Stack.Screen name="Settings" component={Settings} />
       <Stack.Screen
         name="ToDoList"
         component={ToDoList}

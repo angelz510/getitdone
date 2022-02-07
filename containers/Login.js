@@ -28,7 +28,7 @@ const login = async (email, password) => {
     email,
     password
   );
-  console.log(userCredential);
+  console.log(userCredential.user);
 };
 
 const createAccount = async (email, password) => {
@@ -37,7 +37,7 @@ const createAccount = async (email, password) => {
     email,
     password
   );
-  console.log(userCredential);
+  console.log(userCredential.user);
 };
 
 const validateFields = (email, password) => {
