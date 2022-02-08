@@ -7,7 +7,6 @@ import {
   FlatList,
 } from "react-native";
 import ToDoItem from "../components/ToDoItem";
-import Colors from "../colors/Colors";
 
 const renderAddIcon = (addTodo) => {
   return (

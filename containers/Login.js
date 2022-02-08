@@ -4,41 +4,6 @@ import Colors from "../colors/Colors";
 import Button from "../components/Button";
 import LabeledInput from "../components/LabeledInput";
 import validator from "validator";
-import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
-
-const firebaseApp = initializeApp({
-  apiKey: "AIzaSyD0FbAxw4wSsy7qcX3KDZ3eRiy9HN2S4S4",
-  authDomain: "getitdone-e2ad2.firebaseapp.com",
-  projectId: "getitdone-e2ad2",
-  storageBucket: "getitdone-e2ad2.appspot.com",
-  messagingSenderId: "693524893315",
-  appId: "1:693524893315:web:a98e2489916cfb326a55b6",
-});
-
-const auth = getAuth(firebaseApp);
-
-const login = async (email, password) => {
-  const userCredential = await signInWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-  console.log(userCredential.user);
-};
-
-const createAccount = async (email, password) => {
-  const userCredential = await createUserWithEmailAndPassword(
-    auth,
-    email,
-    password
-  );
-  console.log(userCredential.user);
-};
 
 const validateFields = (email, password) => {
   const isValid = {
@@ -54,7 +19,7 @@ const validateFields = (email, password) => {
   return isValid;
 };
 
-export default () => {
+export default ({ login, createAccount }) => {
   const [isCreateMode, setCreateMode] = useState(false);
   const [emailField, setEmailField] = useState({
     text: "",

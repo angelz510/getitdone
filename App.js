@@ -8,7 +8,11 @@ import ToDoList from "./containers/ToDoList";
 import EditList from "./containers/EditList";
 import Login from "./containers/Login";
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyD0FbAxw4wSsy7qcX3KDZ3eRiy9HN2S4S4",
@@ -21,6 +25,24 @@ const firebaseApp = initializeApp({
 
 const auth = getAuth(firebaseApp);
 
+const login = async (email, password) => {
+  const userCredential = await signInWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+  console.log(userCredential.user);
+};
+
+const createAccount = async (email, password) => {
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+  console.log(userCredential.user);
+};
+
 const Stack = createStackNavigator();
 const AuthStack = createStackNavigator();
 
@@ -29,7 +51,6 @@ const AuthScreens = () => {
     <AuthStack.Navigator>
       <AuthStack.Screen
         name="Login"
-        component={Login}
         options={() => {
           return {
             headerStyle: {
@@ -42,7 +63,11 @@ const AuthScreens = () => {
             },
           };
         }}
-      />
+      >
+        {(props) => (
+          <Login {...props} createAccount={createAccount} login={login} />
+        )}
+      </AuthStack.Screen>
     </AuthStack.Navigator>
   );
 };

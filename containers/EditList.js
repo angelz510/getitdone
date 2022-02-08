@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import { CommonActions } from "@react-navigation/native";
 import Colors from "../colors/Colors";
 import ColorSelector from "../components/ColorSelector";
