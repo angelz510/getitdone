@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Colors from "./colors/Colors";
-import Home from "./containers/Home";
-import Settings from "./containers/Settings";
-import ToDoList from "./containers/ToDoList";
-import EditList from "./containers/EditList";
-import Login from "./containers/Login";
+import Home from "./screens/Home";
+import Settings from "./screens/Settings";
+import ToDoList from "./screens/ToDoList";
+import EditList from "./screens/EditList";
+import Login from "./screens/Login";
 import { initializeApp } from "firebase/app";
+import { collection, getFirestore, getDoc } from "firebase/firestore";
 import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 const firebaseApp = initializeApp({
@@ -24,6 +26,9 @@ const firebaseApp = initializeApp({
 });
 
 const auth = getAuth(firebaseApp);
+const database = getFirestore();
+
+const usersRef = collection(database, "users");
 
 const login = async (email, password) => {
   const userCredential = await signInWithEmailAndPassword(
@@ -31,7 +36,6 @@ const login = async (email, password) => {
     email,
     password
   );
-  console.log(userCredential.user);
 };
 
 const createAccount = async (email, password) => {
@@ -40,7 +44,7 @@ const createAccount = async (email, password) => {
     email,
     password
   );
-  console.log(userCredential.user);
+  collection(database, "users").doc(usersRef.uid).set({});
 };
 
 const Stack = createStackNavigator();
